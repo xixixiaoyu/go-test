@@ -2,47 +2,63 @@ package main
 
 import "fmt"
 
+// 演示不同的变量声明方式
+var name string = "小明"    // 标准方式
+var age = 25              // 类型推断
+var (
+    height float64 = 175.5  // 身高
+    weight int     = 70     // 体重
+    isStudent bool  = false // 是否为学生
+)
+
+// 包级常量声明
+const Pi = 3.14159
+const (
+    StatusOK    = 200
+    StatusError = 500
+)
+
+// 使用iota的枚举示例
+const (
+    Sunday = iota
+    Monday
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+)
+
 func main() {
-    // 变量声明和使用
-    var age int // 标准格式声明变量
-    fmt.Println("初始 age:", age) // 输出: 初始 age: 0
+    // 函数内的变量声明
+    salary := 8000 // 短变量声明
 
-    age = 30 // 赋值，改变 age 的值
-    fmt.Println("后来 age:", age) // 输出: 后来 age: 30
+    // 演示变量的零值
+    var defaultInt int
+    var defaultString string
+    var defaultBool bool
+    
+    fmt.Println("变量演示:")
+    fmt.Printf("姓名: %s, 年龄: %d\n", name, age)
+    fmt.Printf("身高: %.1f, 体重: %d, 是否学生: %v\n", height, weight, isStudent)
+    fmt.Printf("月薪: %d\n", salary)
+    
+    fmt.Println("\n零值演示:")
+    fmt.Printf("整数默认值: %d\n", defaultInt)
+    fmt.Printf("字符串默认值: %q\n", defaultString)
+    fmt.Printf("布尔值默认值: %v\n", defaultBool)
+    
+    fmt.Println("\n常量演示:")
+    fmt.Printf("圆周率: %f\n", Pi)
+    fmt.Printf("状态码: %d, %d\n", StatusOK, StatusError)
+    
+    fmt.Println("\n星期枚举:")
+    fmt.Printf("Sunday: %d, Monday: %d\n", Sunday, Monday)
 
-    var name string = "小明" // 声明 + 初始化
-    fmt.Println("名字:", name) // 输出: 名字: 小明
-
-    var score = 95.5 // 类型推断
-    fmt.Println("分数:", score) // 输出: 分数: 95.5
-
-    city := "北京" // 短变量声明 (最常用！)
-    fmt.Println("城市:", city) // 输出: 城市: 北京
-
-    name = "小强" // 改变 name 的值
-    fmt.Println("新名字:", name) // 输出: 新名字: 小强
-
-    // 常量声明和使用
-    const pi = 3.14159 // 类型推断声明常量
-    const greeting = "你好"
-    fmt.Println(greeting, pi) // 输出: 你好 3.14159
-
-    // greeting = "Hello" // 这行会报错！常量不能修改
-
-    const (
-        a = iota // a = 0, iota 被重置为 0
-        b        // b = 1, 没写值，默认和上一行一样，iota 递增
-        c = iota // c = 2, 显式使用 iota，此时 iota 是 2
-        d        // d = 3, 没写值，默认和上一行一样，iota 递增
-    )
-
-    const (
-        _  = iota             // 0, 使用空白标识符忽略
-        KB = 1 << (10 * iota) // 1 << (10*1) = 1024 (KB)
-        MB = 1 << (10 * iota) // 1 << (10*2) = 1048576 (MB)
-        GB = 1 << (10 * iota) // 1 << (10*3) = 1073741824 (GB)
-    )
-
-    fmt.Println(a, b, c, d) // 输出: 0 1 2 3
-    fmt.Println(KB, MB, GB) // 输出: 1024 1048576 1073741824
+    // 演示作用域
+    {
+        innerVar := "我是代码块内的变量"
+        fmt.Println(innerVar)
+    }
+    // 这里已经不能访问 innerVar 了
 }
